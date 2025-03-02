@@ -18,7 +18,7 @@ public class PhoneDirectory extends Application {
         FXMLLoader loaderPerson = new FXMLLoader(PhoneDirectory.class.getResource("demon/person/view/person-view.fxml"));
         apWrap.getChildren().add(loaderPerson.load());
 
-        Scene sceneMain = new Scene(paneMain, 600, 400);
+        Scene sceneMain = new Scene(paneMain, 700, 400);
         stage.setTitle("Phone Directory");
         stage.setScene(sceneMain);
         stage.show();

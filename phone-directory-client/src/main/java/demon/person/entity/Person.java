@@ -1,4 +1,4 @@
-package demon.phone;
+package demon.person.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,5 +17,16 @@ public class Person {
 
     private String lastName;
     private String firstName;
+    private String secondName;
+    private String phoneNumber;
+    private String phoneIpNumber;
+    private String department;
+    private String post;
+
+    @Transient
+    private String fio;
+    public String getFio() {
+        return lastName + " " + firstName + " " + secondName;
+    }
 
 }
