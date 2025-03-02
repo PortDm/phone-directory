@@ -35,7 +35,7 @@ public class PersonController {
     private void initTablePerson() {
         colId.setCellValueFactory(new PropertyValueFactory<Person, String>("id"));
         colFio.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
-        colDepartment.setCellValueFactory(new PropertyValueFactory<Person, String>("department"));
+        colDepartment.setCellValueFactory(new PropertyValueFactory<Person, String>("nameDepartment"));
         colPost.setCellValueFactory(new PropertyValueFactory<Person, String>("post"));
     }
 

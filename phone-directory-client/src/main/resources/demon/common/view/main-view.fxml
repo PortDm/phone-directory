@@ -5,13 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demon.common.controller.MainController">
    <children>
       <VBox layoutX="52.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="empty" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="empty" />
+            <Button fx:id="btnPerson" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnPerson" text="ЛС" />
+            <Button fx:id="btnPhone" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnPhone" text="Тел." />
          </children>
          <padding>
             <Insets left="5.0" right="5.0" top="10.0" />

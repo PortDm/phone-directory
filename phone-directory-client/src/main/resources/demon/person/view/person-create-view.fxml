@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-
 <AnchorPane prefHeight="290.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demon.person.controller.PersonCreateController">
    <children>
       <GridPane layoutX="93.0" layoutY="70.0" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
@@ -38,10 +37,10 @@
             <TextField fx:id="tfLastName" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
             <TextField fx:id="tfFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="tfSecondName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <SearchableComboBox fx:id="cbDepartment" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="tfPost" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="tfPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="tfPhoneIpNumber" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <SearchableComboBox fx:id="cbDepartment" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <HBox alignment="BOTTOM_RIGHT" layoutX="200.0" layoutY="260.0" prefHeight="36.0" prefWidth="460.0" spacing="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
