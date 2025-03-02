@@ -1,14 +1,21 @@
 package demon.person.controller;
 
+import demon.person.entity.Department;
 import demon.person.entity.Person;
 import demon.util.HibernateUtil;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PersonController {
@@ -22,7 +29,7 @@ public class PersonController {
     @FXML
     private void initialize() {
         initTablePerson();
-//        loadFromDbPerson();
+        loadFromDbPerson();
     }
 
     private void initTablePerson() {
@@ -33,24 +40,25 @@ public class PersonController {
     }
 
     @FXML
-    private void onBtnCreatePerson() {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Person person = new Person();
-            person.setLastName("Портных");
-            person.setFirstName("Дмитрий");
-            person.setSecondName("Викторович");
-            person.setDepartment("инновационный отдел");
-            person.setPost("старший инженер");
-            person.setPhoneNumber("701");
-            person.setPhoneIpNumber("2701");
+    private void onBtnCreatePerson() throws IOException {
+        FXMLLoader loaderPersonCreate = new FXMLLoader(PersonController.class.getResource("/demon/person/view/person-create-view.fxml"));
+        Scene scene = new Scene(loaderPersonCreate.load(), 500, 290);
+        Stage stage = new Stage();
+        stage.setTitle("Создать сотрудника");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+        loadFromDbPerson();
+    }
 
-            session.beginTransaction();
-            session.persist(person);
-            session.getTransaction().commit();
-            session.close();
-
-            loadFromDbPerson();
-        }
+    public void onBtnCreateDepartment() throws IOException {
+        FXMLLoader loaderCreateDepartment = new FXMLLoader(PersonController.class.getResource("/demon/person/view/department-create-view.fxml"));
+        Scene scene = new Scene(loaderCreateDepartment.load(), 400, 150);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Создать подразделение");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     private void loadFromDbPerson() {
@@ -63,5 +71,9 @@ public class PersonController {
             session.getTransaction().commit();
             session.close();
         }
+    }
+
+    public void onBtnGetDepartment(ActionEvent actionEvent) {
+        loadFromDbPerson();
     }
 }

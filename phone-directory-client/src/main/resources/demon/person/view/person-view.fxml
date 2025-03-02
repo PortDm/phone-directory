@@ -17,9 +17,11 @@
             <TableColumn fx:id="colPost" prefWidth="137.0" text="Должность" />
         </columns>
       </TableView>
-      <HBox alignment="TOP_RIGHT" layoutX="279.0" layoutY="-20.0" prefHeight="50.0" prefWidth="500.0" AnchorPane.bottomAnchor="362.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="TOP_RIGHT" layoutX="279.0" layoutY="-20.0" prefHeight="50.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="362.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBtnCreatePerson" text="Создать" />
+            <Button mnemonicParsing="false" onAction="#onBtnGetDepartment" text="Get department" />
+            <Button mnemonicParsing="false" onAction="#onBtnCreateDepartment" text="Создать подразделение" />
+            <Button mnemonicParsing="false" onAction="#onBtnCreatePerson" text="Создать сотрудника" />
          </children>
          <opaqueInsets>
             <Insets />
