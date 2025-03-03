@@ -7,9 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +18,7 @@ import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class PersonController {
 
@@ -99,12 +98,19 @@ public class PersonController {
     }
 
     public void onBtnRemovePerson() {
-        Person personRemove = tvPerson.getSelectionModel().getSelectedItem();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            session.remove(personRemove);
-            session.getTransaction().commit();
-            loadFromDbPerson();
+        Alert alertConfirmRemove = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmRemove.setHeaderText("Сотрудник будет удален");
+        alertConfirmRemove.setContentText("Продолжить?");
+        alertConfirmRemove.setTitle("Внимание");
+        Optional<ButtonType> result = alertConfirmRemove.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Person personRemove = tvPerson.getSelectionModel().getSelectedItem();
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                session.beginTransaction();
+                session.remove(personRemove);
+                session.getTransaction().commit();
+                loadFromDbPerson();
+            }
         }
     }
 }
