@@ -7,9 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.hibernate.Session;
@@ -20,11 +23,16 @@ import java.util.List;
 
 public class PersonController {
 
-    @FXML private TableView<Person> tvPerson;
-    @FXML private TableColumn<Person, String> colId;
-    @FXML private TableColumn<Person, String> colFio;
-    @FXML private TableColumn<Person, String> colDepartment;
-    @FXML private TableColumn<Person, String> colPost;
+    @FXML
+    private TableView<Person> tvPerson;
+    @FXML
+    private TableColumn<Person, String> colId;
+    @FXML
+    private TableColumn<Person, String> colFio;
+    @FXML
+    private TableColumn<Person, String> colDepartment;
+    @FXML
+    private TableColumn<Person, String> colPost;
 
     @FXML
     private void initialize() {
@@ -73,7 +81,30 @@ public class PersonController {
         }
     }
 
-    public void onBtnGetDepartment(ActionEvent actionEvent) {
-        loadFromDbPerson();
+    public void onTvMouseClicked(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+            if (mouseEvent.getClickCount() == 2) {
+                FXMLLoader loaderPerson = new FXMLLoader(PersonController.class.getResource("/demon/person/view/person-create-view.fxml"));
+                Scene scene = new Scene(loaderPerson.load());
+                PersonCreateController personCreateController = loaderPerson.getController();
+                Person selectPerson = tvPerson.getSelectionModel().getSelectedItem();
+                personCreateController.setPerson(selectPerson);
+                Stage stage = new Stage();
+                stage.setTitle("Редактировать сотрудника");
+                stage.setScene(scene);
+                stage.showAndWait();
+                loadFromDbPerson();
+            }
+        }
+    }
+
+    public void onBtnRemovePerson() {
+        Person personRemove = tvPerson.getSelectionModel().getSelectedItem();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            session.remove(personRemove);
+            session.getTransaction().commit();
+            loadFromDbPerson();
+        }
     }
 }

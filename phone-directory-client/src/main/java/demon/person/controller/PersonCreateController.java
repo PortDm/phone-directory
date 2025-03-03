@@ -16,6 +16,8 @@ import java.util.Optional;
 public class PersonCreateController {
 
     @FXML
+    private Button btnCreate;
+    @FXML
     private Button btnCancel;
     @FXML
     private TextField tfLastName;
@@ -32,16 +34,28 @@ public class PersonCreateController {
     @FXML
     private TextField tfPhoneIpNumber;
 
+    private boolean isEditable = false;
+    private Person person;
+
     public void initialize() {
+        setCbDepartment();
+    }
+
+    private void setCbDepartment() {
         loadFromDbDepartment();
         cbDepartment.getItems().addAll(listDepartments);
         cbDepartment.setConverter(new ComboboxUtil());
-        cbDepartment.setEditable(true);
     }
 
     public void onBtnCreatePerson() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Person person = new Person();
+            if (!isEditable) {
+                person = new Person();
+            } else {
+                person = session.get(Person.class, person.getId());
+            }
+
+
             person.setLastName(tfLastName.getText().trim());
             person.setFirstName(tfFirstName.getText().trim());
             person.setSecondName(tfSecondName.getText().trim());
@@ -56,6 +70,7 @@ public class PersonCreateController {
 
             btnCancel.getScene().getWindow().hide();
         }
+
     }
 
     public void onBtnCancel() {
@@ -78,5 +93,19 @@ public class PersonCreateController {
             listDepartments = queryDepartments.getResultList();
             session.getTransaction().commit();
         }
+    }
+
+    public void setPerson(Person personEditable) {
+        btnCreate.setText("Редактировать");
+        isEditable = true;
+        person = personEditable;
+
+        tfLastName.setText(person.getLastName());
+        tfFirstName.setText(person.getFirstName());
+        tfSecondName.setText(person.getSecondName());
+        tfPost.setText(person.getPost());
+        tfPhoneNumber.setText(person.getPhoneNumber());
+        tfPhoneIpNumber.setText(person.getPhoneIpNumber());
+        cbDepartment.getSelectionModel().select(person.getDepartment());
     }
 }

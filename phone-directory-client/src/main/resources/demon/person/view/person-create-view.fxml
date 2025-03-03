@@ -45,7 +45,7 @@
       </GridPane>
       <HBox alignment="BOTTOM_RIGHT" layoutX="200.0" layoutY="260.0" prefHeight="36.0" prefWidth="460.0" spacing="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBtnCreatePerson" text="Создать" />
+            <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#onBtnCreatePerson" text="Создать" />
             <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onBtnCancel" text="Отмена" />
          </children>
       </HBox>
